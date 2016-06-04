@@ -1,0 +1,33 @@
+.jumbotron {
+    background-image: url(../img/background.png);
+}
+
+DIV.table 
+{
+    display:table;
+    border-style: solid;
+    border-width: 1px;
+}
+FORM.tr, DIV.tr
+{
+    display:table-row;
+    border-style: solid;
+    border-width: 1px;
+}
+SPAN.td
+{
+    display:table-cell;
+    border-style: solid;
+    border-width: 1px;
+    padding: 1px 1px 1px 1px;
+}
+
+.tidfield
+{
+	width: 50px;
+}
+
+.tdatafield
+{
+	width: 200px;
+}
