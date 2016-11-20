@@ -16,6 +16,8 @@
         
         echo '<li class="active">';
         echo '<li><a href="#" id="display">Display data</a></li>';
+        echo '<li><a href="#" id="forum">Forum</a></li>';
+        echo '<li><a href="#" id="forumadmin">Forum Admin</a></li>';
         echo '<li><a href="#" id="adddata">Add data</a></li>';
         echo '<li><a href="#" id="member">Memberlist</a></li>';
         echo '<li><a href="#" id="editacc">Edit Account</a></li>';

@@ -1,0 +1,15 @@
+FORUM:
+lägga till categorier (kvar: fixa så att samma namn kan finnas i olika kategorier.)
+
+fixa så att formateringen av textarea kvarstår
+
+göra så att uppdaterat forum visas efter tillägg
+
+fixa strukturen på forumet
+(göra det snyggare)
+
+
+ALLMÄNT:
+users med olika privelegier
+
+fungerande back/framåt funktioner

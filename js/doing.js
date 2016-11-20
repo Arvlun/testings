@@ -43,6 +43,37 @@ function initialize() {
             $("#maincontent").load("lcl/login.html");
         });
 
+        $("#forum").on("click", function() {
+            $.ajax({
+                url: "php/forum.php",
+                success: function(response){
+                //console.log("stage2");
+                //console.log(response);
+                $("#maincontent").html(response);
+                //initialise();
+                intializeForum();
+                },
+                error: function() {
+                    $("#maincontent").html("WUT");
+
+                }
+            });
+        });
+
+        $("#forumadmin").on("click", function() {
+            $.ajax({
+                url: "php/forumadmin.php",
+                success: function(response){
+                $("#maincontent").html(response);
+                intializeForum();
+                },
+                error: function() {
+                    $("#maincontent").html("WUT");
+
+                }
+            });
+        });
+
         $("#editacc").on("click", function() {
             $.ajax({
                 url: "php/edit_account.php",
@@ -150,5 +181,123 @@ function intializeUpdatebutton() {
                 }
             });
         });
+}
+
+function intializeForum() {
+
+        $(".clickable-row").on("click", function() {
+            var butid = $(this).attr('id');
+            var dataid = parseInt(butid.slice(3));
+            //console.log(butid);
+            //console.log(dataid);
+            $.ajax({
+                type: 'POST',
+                url: "php/forumthread.php",
+                data: { id: dataid },
+                success: function(response){
+                  $("#maincontent").html(response);
+                  intializeForum();  
+                },
+                error: function() {
+                    $("#maincontent").html("WUT");
+                }
+            });
+        });
+
+        $("#submitpost").on("click", function() {
+            var tval = $("#titlefield").val();
+            var pfval = $("#postfield").val();
+            var category = $('#categorySelectPost').val();
+            console.log(pfval);
+            console.log(tval);
+            console.log(category);
+
+            $.ajax({
+                type: 'POST',
+                url: "php/forumpost.php",
+                data: { content: pfval,
+                        title: tval,
+                        subcat: category},
+                success: function(response){
+                  $("#maincontent").html(response);  
+                },
+                error: function() {
+                    $("#maincontent").html("WUT");
+                }
+            });
+        });
+
+        $("#savesubcat").on("click", function() {
+            var tval = $("#subcatfield").val();
+            var pfval = $("#subcatdescfield").val();
+            var category = $('#categorySelect').val();
+            console.log(pfval);
+            console.log(tval);
+            console.log(category);
+
+            $.ajax({
+                type: 'POST',
+                url: "php/forumadminsubcategory.php",
+                data: { description: pfval,
+                        title: tval,
+                        category: category},
+                success: function(response){
+                    console.log(response);
+                    alert("Subategory added!");
+                },
+                error: function() {
+                    $("#maincontent").html("WUT");
+                }
+            });
+        });
+
+        $("#savecat").on("click", function() {
+            var tval = $("#catfield").val();
+            var pfval = $("#catdescfield").val();
+            console.log(pfval);
+            console.log(tval);
+
+            $.ajax({
+                type: 'POST',
+                url: "php/forumadmincategory.php",
+                data: { description: pfval,
+                        title: tval},
+
+                success: function(response){
+                  $("#categorySelect").html('');
+                  var resp = JSON.parse(response);
+                  var result = resp.map(function(a) {return a.category;});
+                  for (var i=0; i<result.length; i++) {
+                    console.log(result[i]);
+                    $("#categorySelect").append('<option value="'+result[i]+'">'+result[i]+'</option>');
+                  }
+                  alert("Category added!");
+                },
+                error: function() {
+                    $("#maincontent").html("WUT");
+                }
+            });
+        });
+
+        $("#submitreply").on("click", function() {
+            var tval = $("#replytitlefield").val();
+            var pfval = $("#replyfield").val();
+            var hval = $("#replypostid").val();
+            $.ajax({
+                type: 'POST',
+                url: "php/forumreply.php",
+                data: { content: pfval,
+                        title: tval,
+                        postid: hval},
+                success: function(response){
+                  $("#maincontent").html(response);  
+                },
+                error: function() {
+                    $("#maincontent").html("WUT");
+                }
+            });
+        });
+
+
 }
 
